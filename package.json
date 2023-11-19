@@ -1,0 +1,24 @@
+{
+  "name": "tech-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sever.js",
+  "scripts": {
+    "test": "",
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RG-GitUser/tech-blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RG-GitUser/tech-blog/issues"
+  },
+  "homepage": "https://github.com/RG-GitUser/tech-blog#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
+  }
+}
