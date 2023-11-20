@@ -1,30 +1,24 @@
 // server.js
 
 const express = require('express');
-const exphbs = require('express-handlebars');
 const session = require('express-session');
-const connect = require('connect');
-const SequelizeStore = require('connect-session-sequelize');
+const sessionMiddleware = require('./session.js');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const path = require('path');
+const sequelize = require('./src/config/sequelize.js'); // Import sequelize.js from the config directory
 
 const app = express();
 
 // Handlebars setup
+const exphbs = require('express-handlebars');
 const hbs = exphbs.create({
   layoutsDir: path.join(__dirname, 'views/layouts'),
- 
+
 });
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.set('views', './views');
-
-
-
-// Handlebars setup
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
-app.set('views', './views');
+app.set('views', path.join(__dirname, 'views'));
 
 // Session setup with SequelizeStore
 const sequelizeStoreOptions = {
@@ -40,6 +34,9 @@ const configureSession = (app) => {
     })
   );
 };
+
+//Session middleware
+app.use(sessionMiddleware);
 
 configureSession(app);
 
