@@ -1,16 +1,28 @@
-// app.js
+// server.js
 
-import express from 'express';
-import { engine } from 'express-handlebars';
-import session from 'express-session';
-import connect from 'connect';
-import SequelizeStore from 'connect-session-sequelize';
+const express = require('express');
+const exphbs = require('express-handlebars');
+const session = require('express-session');
+const connect = require('connect');
+const SequelizeStore = require('connect-session-sequelize');
 const path = require('path');
 
 const app = express();
 
 // Handlebars setup
-app.engine('handlebars', engine());
+const hbs = exphbs.create({
+  layoutsDir: path.join(__dirname, 'views/layouts'),
+ 
+});
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
+
+
+// Handlebars setup
+app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
