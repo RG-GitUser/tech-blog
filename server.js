@@ -1,10 +1,12 @@
 //imports
 const express = require('express');
 const session = require('express-session');
+const exphbs = require('express-handlebars');
 const routes = require('./controllers');
-const dotenv = require('dotenv'); // Add this line
+const dotenv = require('./dotenv'); 
 
-dotenv.config(); //load environment variables
+
+require('dotenv').config(); //load environment variables
 
 //sequilize for storing session data in db 
 const sequelize = require('./config/connection');
@@ -31,6 +33,14 @@ const sess = {
 
 app.use(session(sess));
 
+
+ //handlebar.js setup
+ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+ app.set('view engine', 'handlebars');
+ 
+ app.use(express.static('public'));
+ 
+
 //middleware config to parse JSON 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -46,3 +56,9 @@ sequelize.sync({ force: false })
   .catch((error) => {
     console.error('Error syncing Sequelize models:', error);
   });
+
+  //handlebar.js
+  app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+app.use(express.static('public'));
