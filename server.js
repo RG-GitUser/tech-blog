@@ -3,7 +3,6 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
-const dotenv = require('./dotenv'); 
 
 
 require('dotenv').config(); //load environment variables
@@ -31,14 +30,12 @@ const sess = {
 };
 
 
+
 app.use(session(sess));
-
-
- //handlebar.js setup
- app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
- app.set('view engine', 'handlebars');
- 
- app.use(express.static('public'));
+const hbs = exphbs.create({ defaultLayout: 'main' });
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+app.use(express.static('public'));
  
 
 //middleware config to parse JSON 
@@ -57,8 +54,3 @@ sequelize.sync({ force: false })
     console.error('Error syncing Sequelize models:', error);
   });
 
-  //handlebar.js
-  app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
-
-app.use(express.static('public'));
