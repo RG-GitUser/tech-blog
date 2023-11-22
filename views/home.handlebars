@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog</title><script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<section>
+    <div id="main-content"></div>
+
+    <script id="homepage-template" type="text/x-handlebars-template">
+        <!-- Your homepage template goes here -->
+        <h1>Welcome to My Blog</h1>
+
+        {{#if blogPosts.length}}
+            <h2>Latest Blog Posts</h2>
+            <ul>
+                {{#each blogPosts}}
+                    <li>{{this.title}}</li>
+                {{/each}}
+            </ul>
+        {{else}}
+            <p>No blog posts yet.</p>
+        {{/if}}
+
+        <nav>
+            <ul>
+                <li><a href="#" id="homepage-link">Homepage</a></li>
+                <li><a href="#" id="dashboard-link">Dashboard</a></li>
+            </ul>
+        </nav>
+
+             <p><a href="#" id="login-link">Log In</a></p>
+</section> 
+</body>
+</html>
+<script src="home.handlebars"></script>
+
+
+

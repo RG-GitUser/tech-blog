@@ -45,12 +45,35 @@ app.use(express.urlencoded({ extended: true }));
 //gets the routes uses from controllers 
 app.use(routes);
 
-//syncing database with sequilize 
+// ... (your imports and middleware configurations)
+
+// Route for rendering handlebars view
+app.get('/', (req, res, next) => {
+  try {
+    res.render('home', { pageTitle: 'Home Page' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Use routes middleware
+app.use(routes);
+
+
+// global error handler middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
+});
+
+// syncing database with sequelize 
 sequelize.sync({ force: false })
   .then(() => {
     app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
   })
   .catch((error) => {
     console.error('Error syncing Sequelize models:', error);
-  });
+  }); 
+
+
 
