@@ -10,13 +10,13 @@ const data = {
 // Compile the Handlebars template
 const homepageTemplate = Handlebars.compile(document.getElementById('homepage-template').innerHTML);
 
-// Render the homepage with the sample data
+// Render the homepage 
 document.getElementById('main-content').innerHTML = homepageTemplate(data);
 
 // Add event listener for the homepage link
 document.getElementById('homepage-link').addEventListener('click', (event) => {
     event.preventDefault();
-    // Handle homepage link click (e.g., navigate to the homepage)
+    // Handle homepage link click 
     console.log('Homepage link clicked');
     window.location.href = '/';
 });
@@ -27,6 +27,6 @@ document.getElementById('dashboard-link').addEventListener('click', () => {
 });
 
 document.getElementById('login-link').addEventListener('click', () => {
-    // Handle login link click (e.g., show a login modal or navigate to the login page)
+    // Handle login link click 
     console.log('Login link clicked');
 });
