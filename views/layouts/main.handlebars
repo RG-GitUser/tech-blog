@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Blog</title>
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 
 </head>
@@ -13,26 +12,13 @@
     <div id="main-content"></div>
     <nav>
         <h1>My Tech Blog</h1>
-        <ul>
-            <!-- Use Handlebars to dynamically set the "active" class for the Home link -->
-            <li class="{{#if isActive 'home'}}active{{/if}}">
-                <a href="/">Home</a>
-            </li>
-            <li class="{{#if isActive 'dashboard'}}active{{/if}}">
-                <a href="/dashboard">Dashboard</a>
-            </li>
-            <li class="{{#if isActive 'login'}}active{{/if}}">
-                <a href="/login">Login</a>
-            </li>
-            <li class="{{#if isActive 'logout'}}active{{/if}}">
-                <a href="/logout">Logout</a>
-            </li>
-        </ul>
+
     </nav>
 
     {{{body}}}
 
-    <script src="js/home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+    <script src="./js/home.js"></script>
 </body>
 </html>
 
