@@ -14,6 +14,19 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+
+
+app.use(session(sess));
+
+
+const hbs = exphbs.create({ defaultLayout: 'main' });
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
 //middleware config "sess" 
 const sess = {
   secret: process.env.SESSION_SECRET || 'SuperSecretSecret', 
@@ -27,25 +40,6 @@ const sess = {
     db: sequelize,
   }),
 };
-
-app.use(session(sess));
-
-// Register Handlebars helper
-const hbs = exphbs.create({
-  helpers: {
-      isActive: function (route, currentRoute) {
-          return route === currentRoute ? 'active' : '';
-      }
-  },
-  defaultLayout: 'main',
-  extname: '.handlebars'
-});
-
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 //gets the routes for middleware
 app.use(routes);

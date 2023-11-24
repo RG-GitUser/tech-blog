@@ -1,32 +1,38 @@
-// Sample data for demonstration
-const data = {
-    blogPosts: [
+
+//blog posts
+document.addEventListener('DOMContentLoaded', () => {
+    const data = {
+      blogPosts: [
         { title: 'Post 1' },
         { title: 'Post 2' },
-        // Add more blog posts as needed
-    ],
-};
-
+      ],
+    };
+}); 
+  
 // Compile the Handlebars template
 const homepageTemplate = Handlebars.compile(document.getElementById('homepage-template').innerHTML);
 
 // Render the homepage 
 document.getElementById('main-content').innerHTML = homepageTemplate(data);
 
-// Add event listener for the homepage link
-document.getElementById('homepage-link').addEventListener('click', (event) => {
-    event.preventDefault();
-    // Handle homepage link click 
-    console.log('Homepage link clicked');
-    window.location.href = '/';
-});
-
-document.getElementById('dashboard-link').addEventListener('click', () => {
-    // Handle dashboard link click (e.g., navigate to the dashboard)
-    console.log('Dashboard link clicked');
-});
-
-document.getElementById('login-link').addEventListener('click', () => {
-    // Handle login link click 
-    console.log('Login link clicked');
+// Add event listener for all links inside main-content
+document.getElementById('main-content').addEventListener('click', (event) => {
+    const clickedLink = event.target.closest('a');
+    if (clickedLink) {
+        event.preventDefault();
+        const linkId = clickedLink.id;
+        switch (linkId) {
+            case 'homepage-link':
+                console.log('Homepage link clicked');
+                window.location.href = '/';
+                break;
+            case 'dashboard-link':
+                console.log('Dashboard link clicked');
+                break;
+            case 'login-link':
+                console.log('Login link clicked');
+                break;
+            // Add more cases for other links 
+        }
+    }
 });
