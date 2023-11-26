@@ -6,30 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Blog</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/home.css">
 
 </head>
 
 <body>
-    <div id="main-content"></div>
+    <script id="homepage-template" type="text/x-handlebars-template">
+    <!-- Your Handlebars template goes here -->
 
-    <!--navbar content-->
+    <div id="main-content">
+        <!--navbar content-->
 
-     <h1 class='title'>My Tech Blog</h1>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/login">Sign Up</a></li>
-        </ul>
-    </nav>
+        <h1 class='title'>My Tech Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/login">Sign Up</a></li>
+            </ul>
+        </nav>
 
 
 
-    {{{body}}}
-
+        {{{body}}}
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
-    <script src="./js/home.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>
