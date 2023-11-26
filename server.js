@@ -32,22 +32,20 @@ const sess = {
 
 
 //set up handlebars 
-app.engine("handlebars", handlebars.engine);
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 //set public folder
 app.use(express.static('public'));
 
-//allow api to use json and url encoding
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
 
-
 app.use(session(sess));
-//gets the routes for middleware
-app.use(routes);
+
 
 // Route for rendering handlebars view
 app.get('/', async (req, res, next) => {
@@ -59,14 +57,14 @@ app.get('/', async (req, res, next) => {
   }
 });
 
-app.use(controllers);
+// Use the routes middleware
+app.use(routes);
 
-app.use('/dashboard', express.static(path.join(__dirname, 'dashboard.hbs',))); 
 
 // global error handler middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Internal Server Error');
+  res.status(500).send(process.env.NODE_ENV === 'production' ? 'Internal Server Error' : err.message);
 });
 
 // syncing database with sequelize 
