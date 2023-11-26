@@ -2,23 +2,37 @@
 
 /* Nav bar */ 
 
+title {
+    margin-left: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    margin: 0;
+
+}
+
 nav {
     background-color: #333;
     color: #fff;
     padding: 10px;
     margin: 0;
+    text-align: right;
 }
 
 /* Style for the nav bar links */
 nav ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
     
-nav li {
+ li {
         display: inline-block; /* Display links horizontally */
         margin-right: 20px; /* Add spacing between links */
         font-family: Verdana, Geneva, Tahoma, sans-serif;
+       
+
 }
 
 nav a {
