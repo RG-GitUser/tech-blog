@@ -26,13 +26,13 @@ function navigate(path) {
           break;
   }
 }
-function loadHomePage() {
+function loadDashboardPage() {
   // Fetch the dashboard template content
   fetch('views/layouts/dashboard.handlebars')
       .then(response => response.text())
       .then(template => {
           // Compile the Handlebars template
-          const homeTemplate = Handlebars.compile(template);
+          const dashboardTemplate = Handlebars.compile(template);
 
           // Render the template with data
           const html = dashboardTemplate(data);
