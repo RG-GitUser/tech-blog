@@ -18,11 +18,17 @@ nav ul {
 nav li {
         display: inline-block; /* Display links horizontally */
         margin-right: 20px; /* Add spacing between links */
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 nav a {
     color: #fff; /* Text color for links */
     text-decoration: none; /* Remove default underline */
     font-weight: bold; /* Make the text bold */
+    font-family:  ;
+  }
+
+  h1, p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 

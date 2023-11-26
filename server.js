@@ -44,7 +44,7 @@ app.use(routes);
 // Route for rendering handlebars view
 app.get('/', async (req, res, next) => {
   try {
-    res.render('home', { pageTitle: 'Home Page' });
+    res.render('home', { pageTitle: '' });
   } catch (error) {
     console.error(error);
     next(error);
