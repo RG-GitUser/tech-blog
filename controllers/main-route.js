@@ -52,4 +52,4 @@ function loadNotFoundPage() {
     `); // error message 
     const html = notFoundTemplate();
     document.getElementById('main-content').innerHTML = html;
-}
+};

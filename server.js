@@ -16,13 +16,6 @@ const PORT = process.env.PORT || 3001;
 
 const hbs = exphbs.create();
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
 //middleware config "sess" 
 const sess = {
   secret: process.env.SESSION_SECRET || 'SuperSecretSecret', 
@@ -37,6 +30,21 @@ const sess = {
   }),
 };
 
+
+//set up handlebars 
+app.engine("handlebars", handlebars.engine);
+app.set("view engine", "handlebars");
+
+//set public folder
+app.use(express.static('public'));
+
+//allow api to use json and url encoding
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+
+
 app.use(session(sess));
 //gets the routes for middleware
 app.use(routes);
@@ -50,6 +58,10 @@ app.get('/', async (req, res, next) => {
     next(error);
   }
 });
+
+app.use(controllers);
+
+app.use('/dashboard', express.static(path.join(__dirname, 'dashboard.hbs',))); 
 
 // global error handler middleware
 app.use((err, req, res, next) => {
