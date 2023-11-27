@@ -35,27 +35,24 @@ const sess = {
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
-//set public folder
+// set public folder and other middleware
 app.use(express.static('public'));
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
-
 app.use(session(sess));
 
 
 // Route for rendering handlebars view
 app.get('/', async (req, res, next) => {
   try {
-    res.render('home', { pageTitle: '' });
+    res.render('main', { pageTitle: '' });
   } catch (error) {
     console.error(error);
     next(error);
   }
 });
+
+
 
 // Use the routes middleware
 app.use(routes);
