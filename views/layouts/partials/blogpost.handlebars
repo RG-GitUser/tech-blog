@@ -1,0 +1,17 @@
+
+
+<div class="blog-container">
+  <div class="blog-post">
+    {{{blogPostContent}}}
+  </div>
+  <div class="comments">
+    {{{commentsContent}}}
+  </div>
+</div>
+
+
+{{!-- Content of the blog post view --}}
+{{> blogContainer blogPostContent=blogPost commentsContent=comments}}
+
+
+

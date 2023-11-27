@@ -1,7 +1,9 @@
+const router = require('express').Router();
+
 // Route for rendering handlebars view (homepage)
-app.get('/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        res.render('main', { pageTitle: 'Homepage' });
+        res.render('home', { pageTitle: 'Homepage' });
     } catch (error) {
         console.error(error);
         next(error);
@@ -9,7 +11,7 @@ app.get('/', async (req, res, next) => {
 });
 
 // Route for rendering handlebars view (dashboard)
-app.get('/dashboard', async (req, res, next) => {
+router.get('/dashboard', async (req, res, next) => {
     try {
         res.render('dashboard', { pageTitle: 'Dashboard' });
     } catch (error) {
@@ -19,3 +21,4 @@ app.get('/dashboard', async (req, res, next) => {
 });
 
 
+module.exports = router;

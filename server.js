@@ -52,6 +52,16 @@ app.get('/', async (req, res, next) => {
   }
 });
 
+// Middleware to set navbar partial for all views
+app.use((req, res, next) => {
+  res.locals.navbar = 'navbar';
+  next();
+});
+
+// Routes for navbar
+app.get('/', (req, res) => {
+  res.render('home', { layout: 'main' });
+});
 
 
 // Use the routes middleware
