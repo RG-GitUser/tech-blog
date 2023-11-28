@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 }); 
   
-// Compile the Handlebars template
-const homepageTemplate = Handlebars.compile(document.getElementById('main-template').innerHTML);
+// // Compile the Handlebars template
+// const homepageTemplate = Handlebars.compile(document.getElementById('main-template').innerHTML);
 
-// Render the homepage 
-document.getElementById('main-content').innerHTML = homepageTemplate(data);
+// // Render the homepage 
+// document.getElementById('main-content').innerHTML = homepageTemplate(data);
 
 // Add event listener for all links inside main-content
 document.getElementById('main-content').addEventListener('click', (event) => {
