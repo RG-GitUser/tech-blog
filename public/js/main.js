@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }); 
   
 // Compile the Handlebars template
-const homepageTemplate = Handlebars.compile(document.getElementById('homepage-template').innerHTML);
+const homepageTemplate = Handlebars.compile(document.getElementById('main-template').innerHTML);
 
 // Render the homepage 
 document.getElementById('main-content').innerHTML = homepageTemplate(data);
