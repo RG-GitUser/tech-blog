@@ -1,30 +1,30 @@
-// Blog post data
-var jsonData = {
-    "blogPost": {
-      "title": "My Blog Post",
-      "content": "This is the content of my blog post. It can include text, images, and other HTML elements."
-    },
-    "comments": [
-      "Comment 1",
-      "Comment 2",
-      "Comment 3"
-    ]
-  };
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('path/to/your/blogData.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        var homepageTemplateSource = document.getElementById('homepage-template').innerHTML;
+        var homepageTemplate = Handlebars.compile(homepageTemplateSource);
   
-  // Load the homepage template
-  var homepageTemplateSource = document.getElementById('homepage-template').innerHTML;
-  var homepageTemplate = Handlebars.compile(homepageTemplateSource);
+        // Render homepage template with the latest blog posts
+        var latestBlogPosts = getLatestBlogPosts(data, 5); // Change 5 to the desired number of latest posts
+        var homepageHtml = homepageTemplate({ blogPosts: latestBlogPosts });
+        document.getElementById('posts').innerHTML = homepageHtml;
+      })
+      .catch(error => {
+        console.error('Error fetching blog data:', error);
+      });
+  });
   
-  // Render the homepage template with blog post data
-  var homepageHtml = homepageTemplate(jsonData);
-  
-  // Insert the rendered HTML into the DOM
-  document.getElementById('homepage-template').innerHTML = homepageHtml;
-  
-  // Additional template for blog post data
-  var template = Handlebars.compile('<h2>{{blogPost.title}}</h2><p>{{blogPost.content}}</p>');
-  var result = template(jsonData);
-  
-  // Insert the rendered HTML into the DOM
-  document.getElementById("posts").innerHTML = result;
+  // Function to get the latest blog posts
+  function getLatestBlogPosts(allBlogPosts, count) {
+    // Sort blog posts by date in descending order
+    const sortedPosts = allBlogPosts.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));
+    // Slice to get the latest posts up to the specified count
+    return sortedPosts.slice(0, count);
+  }
   

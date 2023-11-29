@@ -1,29 +1,27 @@
-
   <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-<!--homepage handlebars-->
-<div id="homepage-template"></div>
+<!-- Homepage Handlebars Template -->
+<div id="homepage-template">
+  <h1>Welcome to My Blog!</h1>
 
-<h1>Welcome to My Blog!</h1>
-
-
-<div id= "posts"> Latest posts
-
-{{#if blogPosts.length}}
-  <h2>Latest Blog Posts</h2>
-  <ul>
-    {{#each blogPosts}}
-      <li>
-        <h3>{{this.title}}</h3>
-        <p>{{this.content}}</p>
-      </li>
-    {{/each}}
-  </ul>
-{{else}}
-  <p>No blog posts yet.</p>
-{{/if}}
+  <div id="posts">Latest posts
+    {{#if blogPosts.length}}
+      <h2>Latest Blog Posts</h2>
+      <ul>
+        {{#each blogPosts}}
+          <li>
+            <a href="#" class="post-link" data-post-id="{{this.id}}">{{this.title}}</a>
+            <p>{{this.dateCreated}}</p>
+          </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <p>No blog posts yet.</p>
+    {{/if}}
+  </div>
 </div>
-
 
 
 
