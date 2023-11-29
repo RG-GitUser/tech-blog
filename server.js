@@ -1,28 +1,30 @@
-//imports
+// imports
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const path = require('path');
+const homeApiRoutes = require('./api/homeRoutes'); 
+const fs = require('fs');
 
-require('dotenv').config(); //load environment variables
+require('dotenv').config(); // load environment variables
 
-//sequilize for storing session data in db 
+// sequelize for storing session data in the database
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-//specifying the port and express 
+// specifying the port and express
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 const hbs = exphbs.create();
 
-//middleware config "sess" 
+// middleware config "sess"
 const sess = {
-  secret: process.env.SESSION_SECRET || 'SuperSecretSecret', 
+  secret: process.env.SESSION_SECRET || 'SuperSecretSecret',
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
-    secure: false, 
+    secure: false,
   },
   resave: false,
   saveUninitialized: true,
@@ -31,11 +33,10 @@ const sess = {
   }),
 };
 
-
-//set up handlebars 
+// set up handlebars
 app.set('views', path.join(__dirname, 'views'));
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 // set public folder and other middleware
 app.use(express.static('public'));
@@ -43,6 +44,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session(sess));
 
+// serve static files from the 'seeds' directory
+app.use('/seeds', express.static('seeds'));
+
+// API route
+app.use('/api', homeApiRoutes); 
 
 // Route for rendering handlebars view
 app.get('/', async (req, res, next) => {
@@ -60,15 +66,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes for navbar
-app.get('/', (req, res) => {
-  res.render('home', { layout: 'main' });
-});
-
-
 // Use the routes middleware
 app.use(routes);
-
 
 // global error handler middleware
 app.use((err, req, res, next) => {
@@ -76,13 +75,11 @@ app.use((err, req, res, next) => {
   res.status(500).send(process.env.NODE_ENV === 'production' ? 'Internal Server Error' : err.message);
 });
 
-// syncing database with sequelize 
+// syncing database with sequelize
 sequelize.sync({ force: false })
   .then(() => {
     app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
   })
   .catch((error) => {
     console.error('Error syncing Sequelize models:', error);
-  }); 
-
-
+  });

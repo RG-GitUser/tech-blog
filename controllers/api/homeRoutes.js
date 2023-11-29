@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs');
 const router = require('express').Router();
 
 // Route for rendering handlebars view (homepage)
@@ -20,6 +22,16 @@ router.get('/dashboard', async (req, res, next) => {
     }
 });
 
+
+// Route for rednering blogpostData 
+
+// Define the route to serve the JSON data
+router.get('/blogposts', (req, res) => {
+    const blogDataPath = path.join(__dirname, './seeds/blogpostData.json');
+    const blogData = JSON.parse(fs.readFileSync(blogDataPath, 'utf-8'));
+    res.json(blogData);
+  });
+  
 
 
 
