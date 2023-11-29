@@ -1,5 +1,11 @@
 /*main.handlebar.js*/ 
 
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
 /* Nav bar */ 
 
 title {
@@ -11,12 +17,18 @@ title {
 
 }
 
+#homeTitle {
+  text-align: center; 
+  
+}
+
 nav {
     background-color: #333;
     color: #fff;
-    padding: 10px;
+    padding: 15px;
     margin: 0;
     text-align: right;
+    width: 100%;
 }
 
 /* Style for the nav bar links */
