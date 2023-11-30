@@ -2,9 +2,7 @@
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
-const routes = require('./controllers');
 const path = require('path');
-const homeApiRoutes = require('./controllers/api'); 
 const fs = require('fs');
 
 require('dotenv').config(); // load environment variables
@@ -48,17 +46,8 @@ app.use(session(sess));
 app.use('./seeds/blogpostData', express.static('seeds'));
 
 // API route
-app.use(homeApiRoutes);
+app.use(require('./controllers'));
 
-// Route for rendering handlebars view
-app.get('/', async (req, res, next) => {
-  try {
-    res.render('main', { pageTitle: '' });
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
 
 // Middleware to set navbar partial for all views
 app.use((req, res, next) => {
@@ -66,8 +55,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Use the routes middleware
-app.use(routes);
 
 // global error handler middleware
 app.use((err, req, res, next) => {

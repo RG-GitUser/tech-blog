@@ -51,7 +51,7 @@ nav a {
     color: #fff; /* Text color for links */
     text-decoration: none; /* Remove default underline */
     font-weight: bold; /* Make the text bold */
-    font-family:  ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
   }
 
   h1, p {

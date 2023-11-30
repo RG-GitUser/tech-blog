@@ -26,7 +26,7 @@ router.get('/dashboard', async (req, res, next) => {
 // Route for rednering blogpostData 
 
 // Define the route to serve the JSON data
-router.get('/blogposts', (req, res) => {
+router.get('/blogpost', (req, res) => {
     const blogDataPath = path.join(__dirname, './seeds/blogpostData.json');
     const blogData = JSON.parse(fs.readFileSync(blogDataPath, 'utf-8'));
     res.json(blogData);
