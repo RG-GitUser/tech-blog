@@ -18,7 +18,13 @@
       <ul>
         {{#each blogPosts}}
           <li>
-            <a href="#" class="post-link" data-post-id="{{this.id}}">{{this.title}}</a>
+                 
+      {{{get_emoji}}}
+      <a href="//{{project.id}}">{{project.name}}</a>
+    </h2>
+    <p>
+
+
             <p>{{this.dateCreated}}</p>
           </li>
         {{/each}}

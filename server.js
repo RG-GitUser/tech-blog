@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session(sess));
 
 // serve static files from the 'seeds' directory
-app.use('/seeds', express.static('seeds'));
+app.use('./seeds/blogpostData', express.static('seeds'));
 
 // API route
 app.use('/api', homeApiRoutes); 
