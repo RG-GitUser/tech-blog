@@ -25,5 +25,5 @@ const data = {
 const renderedHtml = loginTemplate(data);
 
 // Insert the generated HTML into the desired location in your application
-document.getElementById('login-container').innerHTML = renderedHtml;
+document.getElementById('login-form').innerHTML = renderedHtml;
 

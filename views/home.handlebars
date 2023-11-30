@@ -8,33 +8,25 @@
   <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
 </head>
 <body>
-
-<div id="homepage-template">
-  <h1 id="homeTitle">Welcome to My Blog!</h1>
-
-  <div id="posts">Latest posts
-    {{#if blogPosts.length}}
-      <h2>Latest Blog Posts</h2>
-      <ul>
-        {{#each blogPosts}}
-          <li>
-                 
-      {{{get_emoji}}}
-      <a href="//{{project.id}}">{{project.name}}</a>
-    </h2>
-    <p>
-
-
-            <p>{{this.dateCreated}}</p>
-          </li>
-        {{/each}}
-      </ul>
-    {{else}}
-      <p>No blog posts yet.</p>
-    {{/if}}
+  <div id="homepage-template">
+    <h1 id="homeTitle">Welcome to My Blog!</h1>
+    <div id="posts">Latest posts
+      {{#if blogPosts.length}}
+        <h2>Latest Blog Posts</h2>
+        <ul>
+          {{#each blogPosts}}
+            <li>
+              {{{get_emoji}}}
+              <a href="//{{project.id}}">{{project.name}}</a>
+              <p>{{this.dateCreated}}</p>
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>No blog posts yet.</p>
+      {{/if}}
+    </div>
   </div>
-</div>
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
-<script src="home.js"></script>
+<script src="js/home.js"></script>
+</html>
