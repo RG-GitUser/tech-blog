@@ -5,7 +5,7 @@ const router = require('express').Router();
 // Route for rendering handlebars view (homepage)
 router.get('/', async (req, res, next) => {
     try {
-        res.render('home', { pageTitle: 'Homepage' });
+        res.render('home', { pageTitle: '' });
     } catch (error) {
         console.error(error);
         next(error);
@@ -21,6 +21,17 @@ router.get('/dashboard', async (req, res, next) => {
         next(error);
     }
 });
+
+// Route for rendering log in page 
+router.get('/login', async (req, res, next) => {
+    try {
+        res.render('login', { pageTitle: 'Login' });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
 
 
 // Route for rednering blogpostData 
