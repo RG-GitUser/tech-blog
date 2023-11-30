@@ -4,7 +4,7 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const path = require('path');
-const homeApiRoutes = require('../api/homeRoutes'); 
+const homeApiRoutes = require('./controllers/api'); 
 const fs = require('fs');
 
 require('dotenv').config(); // load environment variables
@@ -48,7 +48,7 @@ app.use(session(sess));
 app.use('./seeds/blogpostData', express.static('seeds'));
 
 // API route
-app.use('/api', homeApiRoutes); 
+app.use(homeApiRoutes);
 
 // Route for rendering handlebars view
 app.get('/', async (req, res, next) => {
