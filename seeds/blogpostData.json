@@ -1,5 +1,4 @@
-{
- "Posts":   [
+[
     {
       "id": 1,
       "title": "Blog Post 1",
@@ -16,6 +15,4 @@
       "username": "User2",
       "comments": ["Comment 3", "Comment 4"]
     }
-  
-  ]
-}
+]

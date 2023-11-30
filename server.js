@@ -4,7 +4,7 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const path = require('path');
-const homeApiRoutes = require('./api/homeRoutes'); 
+const homeApiRoutes = require('../api/homeRoutes'); 
 const fs = require('fs');
 
 require('dotenv').config(); // load environment variables
