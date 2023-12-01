@@ -32,6 +32,17 @@ router.get('/login', async (req, res, next) => {
     }
 });
 
+// Route for rendering sign up page 
+router.get('/signup', async (req, res, next) => {
+    try {
+        res.render('signup', { pageTitle: 'Sign Up' });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+
 
 
 // Route for rednering blogpostData 

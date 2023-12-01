@@ -11,7 +11,7 @@
 
 
 <!-- login.handlebars -->
-<h2>Login</h2>
+<h2 id="login-title">Login</h2>
 <form id="login-form">
   <div>
     <label for="username">Username/Email:</label>
@@ -21,8 +21,12 @@
     <label for="password">Password:</label>
     <input type="password" id="password" value="{{password}}" />
   </div>
-  <button type="submit">Login</button>
+  <button type="submit"></button> 
 </form>
+
+ <div id="no-account">Don't have an account?
+ <link id="create-account"><a href="/signup">Click here to create an account.</a></link>
+</div>
 
 </body>
 </html>
