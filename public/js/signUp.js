@@ -9,12 +9,14 @@ document.getElementById('signupForm').addEventListener('submit', function (e) {
     });
 
     // Compile Handlebars template
-    const source = document.getElementById('signup-template').innerHTML;
+    const source = document.getElementById('your-template-id').innerHTML;
     const template = Handlebars.compile(source);
 
     // Render template with form data
     const result = template(data);
 
-    // Display the result
-    document.body.innerHTML = result;
-  });
+    // Display the result in the signup-template div
+    document.getElementById('signup-template').innerHTML = result;
+});
+
+

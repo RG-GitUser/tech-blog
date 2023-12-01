@@ -41,11 +41,9 @@ router.get('/signup', async (req, res, next) => {
         next(error);
     }
 });
-
-
-
-
 // Route for rednering blogpostData 
+
+
 
 // Define the route to serve the JSON data
 router.get('/blogpost', (req, res) => {

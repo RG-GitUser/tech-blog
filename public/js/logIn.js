@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Compile the Handlebars template
     const loginTemplate = Handlebars.compile(`
       <!-- login.handlebars -->
-      <h2>Login</h2>
+      <h2>Log In</h2>
       <form id="login-form">
         <div>
-          <label for="username">Username/Email:</label>
+          <label for="username">Username or Email:</label>
           <input type="text" id="username" value="{{username}}" />
         </div>
         <div>

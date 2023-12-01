@@ -1,7 +1,7 @@
 
 //Function for fetching json data for posts 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('/seeds/blogpostData.json')
+    fetch('./seeds/blogpostData.json')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
