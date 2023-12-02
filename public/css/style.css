@@ -160,11 +160,13 @@ nav a {
 
   li:hover {
     background-color: grey;
-    color: #e6e6e6; /* Change text color on hover */
+    color: #e6e6e6; 
   }
 
 label {
 font-size: 20px;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
 }
 
 #no-account, create-account {
@@ -200,11 +202,27 @@ font-size: 20px;
 
 }
 
+/*signup page */ 
+
+#signup-container{
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  color: #333;
+  list-style-type: none;
+  margin-bottom: 20px;
+}
 
 
+#signup-container a {
+  color: black;
+  text-decoration: none;
+}
 
 
-
+/*Footer*/ 
 
 footer {
   background-color: #f4f4f4;
