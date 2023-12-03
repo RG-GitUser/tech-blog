@@ -1,21 +1,5 @@
 
-//blog posts
-document.addEventListener('DOMContentLoaded', () => {
-    const data = {
-      blogPosts: [
-        { title: 'Post 1' },
-        { title: 'Post 2' },
-      ],
-    };
-}); 
-  
-// // Compile the Handlebars template
-// const homepageTemplate = Handlebars.compile(document.getElementById('main-template').innerHTML);
-
-// // Render the homepage 
-// document.getElementById('main-content').innerHTML = homepageTemplate(data);
-
-// Add event listener for all links inside main-content
+// Event listener for all links inside main-content
 document.getElementById('main-content').addEventListener('click', (event) => {
     const clickedLink = event.target.closest('a');
     if (clickedLink) {
@@ -36,3 +20,4 @@ document.getElementById('main-content').addEventListener('click', (event) => {
         }
     }
 });
+

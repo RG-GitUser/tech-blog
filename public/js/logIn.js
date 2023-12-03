@@ -23,10 +23,19 @@ const loginFormHandler = async (event) => {
       // If successful, take user to dashboard
       document.location.replace('/dashboard');
     } else {
-      alert(response.statusText);
-    }
-  }
+      alert(
+        "Failed to login. " +
+            response.status +
+            ": " +
+            response.statusText
+    );
+}
+} else {
+alert("Please fill out all fields.");
+}
 };
+    
+  
 
-
+// login status
 

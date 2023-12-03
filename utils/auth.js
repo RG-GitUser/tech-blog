@@ -1,22 +1,11 @@
-const express = require('express');
-const router = express.Router();
-
-// Middleware function checking if the user is authenticated
-const isAuthenticated = (req, res, next) => {
-  if (req.session.loggedIn) {
-    // User is authenticated, proceed to the next middleware or route handler
-    next();
-  } else {
-    // User is not authenticated, redirect them to the login page
-    res.redirect('/login');
-  }
-};
-
-// Applying middleware to the router
-router.get('/dashboard', isAuthenticated, (req, res) => {
-  // Render the dashboard page
-  res.render('dashboard');
-});
-
-// Export the router
-module.exports = router;
+// const authenticate = (req, res, next) => {
+//   // If the user is not logged in, redirect the request to the login route
+//   if (!req.session.logged_in) {
+//     res.redirect('/login');
+//   } else {
+//     next();
+//   }
+// };
+// 
+// module.exports = authenticate;
+// 
