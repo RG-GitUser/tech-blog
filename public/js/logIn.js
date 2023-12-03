@@ -1,30 +1,28 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Compile the Handlebars template
-    const loginTemplate = Handlebars.compile(`
-      <!-- login.handlebars -->
-      <h2>Log In</h2>
-      <form id="login-form">
-        <div>
-          <label for="username">Username or Email:</label>
-          <input type="text" id="username" value="{{username}}" />
-        </div>
-        <div>
-          <label for="password">Password:</label>
-          <input type="password" id="password" value="{{password}}" />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    `);
-  
-    // Define the data for the template
-    const data = {
-      username: '',
-      password: ''
-    };
-  
-    // Render the compiled template with the data
-    const renderedHtml = loginTemplate(data);
-  
-    // Insert the generated HTML into the desired location in your application
-    document.getElementById('login-form').innerHTML = renderedHtml;
-  });
+const loginFormHandler = async (event) => {
+  event.preventDefault();
+
+  // collect data from login form 
+  const email = document.querySelector('#email-login').value.trim();
+  const password = document.querySelector('#password-login').value.trim();
+
+  if (email && password) {
+    // Send a POST request to api 
+    const response = await fetch('/api/users/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      // If successful, take user to dashboard
+      document.location.replace('/dashboard');
+    } else {
+      alert(response.statusText);
+    }
+  }
+};
+
+
+document
+  .querySelector('.login-form')
+  .addEventListener('submit', loginFormHandler);

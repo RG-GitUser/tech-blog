@@ -1,3 +1,43 @@
+//sign up content 
+const signupFormHandler = async (event) => {
+  event.preventDefault();
+
+  const name = document.querySelector('#name-signup').value.trim();
+  const email = document.querySelector('#email-signup').value.trim();
+  const password = document.querySelector('#password-signup').value.trim();
+
+  if (name && email && password) {
+    const response = await fetch('/api/user', {
+      method: 'POST',
+      body: JSON.stringify({ name, email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      alert(response.statusText);
+    }
+  }
+};
+
+
+document
+  .querySelector('.signupForm')
+  .addEventListener('submit', signupFormHandler);
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.getElementById('signupForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -9,7 +49,7 @@ document.getElementById('signupForm').addEventListener('submit', function (e) {
     });
 
     // Compile Handlebars template
-    const source = document.getElementById('your-template-id').innerHTML;
+    const source = document.getElementById('signup-template').innerHTML;
     const template = Handlebars.compile(source);
 
     // Render template with form data
