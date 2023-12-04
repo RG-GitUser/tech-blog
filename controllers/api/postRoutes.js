@@ -5,19 +5,25 @@ const authenticate = require('../../utils/auth');
 
 // create new post - save record to db
 router.post('/dashboard', authenticate, async (req, res) => {
-    try {
-      const postData = await Post.create(req.body);
-  
-      req.session.save(() => {
-        req.session.user_id = postData.id;
-        req.session.logged_in = true;
-  
-        res.status(200).json(postData);
-      });
-    } catch (err) {
-      res.status(400).json(err);
+  try {
+    const postData = await Post.create(req.body);
+
+    req.session.save(() => {
+      req.session.user_id = postData.id;
+      req.session.logged_in = true;
+
+      res.status(200).json(postData);
+    });
+  } catch (err) {
+    // Check if it's a Sequelize validation error
+    if (err.name === 'SequelizeValidationError') {
+      res.status(400).json({ message: 'Validation error', errors: err.errors });
+    } else {
+      res.status(500).json(err);
     }
-  });
+  }
+});
+
 
   //deleting post 
   router.delete('/:id', authenticate, async (req, res) => {

@@ -228,3 +228,20 @@ footer {
   text-align: center;
   margin-top: auto; /* Push the footer to the bottom */
 }
+
+/*dashboard*/
+#dashboard-content {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  color: #333;
+  list-style-type: none;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#newPostBtn {
+  margin-bottom: 30px;
+}

@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
   });
   
 //code for error messages and save successful session 
-  router.post('/login', async (req, res) => {
+  router.post('/login', async (req, res) => { 
+    console.log('req.body = ', req.body)
     try {
       const userData = await User.findOne({ where: { email: req.body.email } });
   

@@ -43,18 +43,6 @@ router.get('/signup', async (req, res, next) => {
 });
 
 
-// Route for rendering log out page
-router.get('/logout', async (req, res, next) => {
-    try {
-        res.render('logout', { pageTitle: 'LogOut' });
-    } catch (error) {
-        console.error(error);
-        next(error);
-    }
-});
-
-// Route for rednering blogpostData 
-
 
 
 // Define the route to serve the JSON data
