@@ -1,6 +1,7 @@
 // imports
 const express = require('express');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const fs = require('fs');
@@ -54,6 +55,22 @@ app.use((req, res, next) => {
   res.locals.navbar = 'navbar';
   next();
 });
+
+
+//sign in server side handler 
+app.post('/api/user', (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: 'Please provide all required information.' });
+  }
+
+  const existingUser = users.find(user => user.email === email);
+  if (existingUser) {
+    return res.status(400).json({ error: 'User with this email already exists.' });
+  }
+});
+
 
 
 
