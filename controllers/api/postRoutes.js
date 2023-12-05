@@ -3,13 +3,13 @@ const router = require('express').Router();
 const authenticate = require('../../utils/auth');
 
 // Create new post - save record to db
-router.post('/api/post', authenticate, async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
     try {
-        const { title, content } = req.body;
+        const { name, content } = req.body;
         const author_id = req.session.user_id; // Assuming you have user authentication
 
         const postData = await Post.create({
-            title,
+            name,
             content,
             user_id: author_id,
         });
