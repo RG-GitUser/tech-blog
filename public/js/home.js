@@ -1,32 +1,41 @@
+document.addEventListener("DOMContentLoaded", function () {
+  fetch('./seeds')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      var homepageTemplateSource = document.getElementById('homepage-template').innerHTML;
+      var homepageTemplate = Handlebars.compile(homepageTemplateSource);
 
-//Function for fetching json data for posts 
-document.addEventListener("DOMContentLoaded", function() {
-    fetch('./seeds/blogpostData.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        var homepageTemplateSource = document.getElementById('homepage-template').innerHTML;
-        var homepageTemplate = Handlebars.compile(homepageTemplateSource);
-  
-        // Render homepage template with the latest blog posts
-        var latestBlogPosts = getLatestBlogPosts(data, 5); // Change 5 to the desired number of latest posts
-        var homepageHtml = homepageTemplate({ blogPosts: latestBlogPosts });
-        document.getElementById('posts').innerHTML = homepageHtml;
-      })
-      .catch(error => {
-        console.error('Error fetching blog data:', error);
-      });
+      // Process the blog post data to include comments
+      var blogPostsWithComments = processBlogPostsWithComments(data);
+
+      // Render homepage template with the latest blog posts and comments
+      var latestBlogPosts = getLatestBlogPosts(blogPostsWithComments, 3); 
+      var homepageHtml = homepageTemplate({ blogPosts: latestBlogPosts });
+      document.getElementById('posts').innerHTML = homepageHtml;
+    })
+    .catch(error => {
+      console.error('Error fetching blog data:', error);
+    });
+});
+
+// Function to process blog post data and include comments
+function processBlogPostsWithComments(allBlogPosts) {
+  return allBlogPosts.map(post => {
+
+    post.comments = post.comments || [];
+    return post;
   });
+}
+
+// Function to get the latest blog posts
+function getLatestBlogPosts(allBlogPosts, count) {
+
+  const sortedPosts = allBlogPosts.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));
   
-  // Function to get the latest blog posts
-  function getLatestBlogPosts(allBlogPosts, count) {
-    // Sort blog posts by date in descending order
-    const sortedPosts = allBlogPosts.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));
-    // Slice to get the latest posts up to the specified count
-    return sortedPosts.slice(0, count);
-  }
-  
+  return sortedPosts.slice(0, count);
+}

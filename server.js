@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const fs = require('fs');
 const { Post } = require('../../models');
+const authenticate = require('../../utils/auth');
 
 require('dotenv').config(); // load environment variables
 
@@ -47,6 +48,14 @@ app.use(session(sess));
 // serve static files from the 'seeds' directory
 app.use('./seeds/blogpostData', express.static('seeds'));
 
+
+//Route to homepage with blog post data
+app.get('/', (req, res) => {
+  res.render('home', { blogPosts: blogpostData });
+});
+
+
+
 // API route
 app.use(require('./controllers'));
 
@@ -74,15 +83,27 @@ app.post('/api/user', (req, res) => {
 
 
 // create post server side handler 
-router.post('/', async (req, res) => {
+router.post('/api/post', authenticate, async (req, res) => {
   try {
     const { title, content, username } = req.body;
+
+    //log the data
+    console.log('Received data:', { title, content, username });
 
     // Create a new post
     const newPost = await Post.create({
       title,
       content,
       username,
+    });
+
+    blogpostData.push({
+      id: newPost.id,
+      title: newPost.title,
+      content: newPost.content,
+      dateCreated: newPost.date_created,  
+      username: newPost.username,
+      comments: [],  // Initialize with an empty array
     });
 
     // Redirect to the homepage or send a success response
@@ -92,6 +113,7 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
 
 
 

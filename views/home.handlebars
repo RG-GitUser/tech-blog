@@ -10,15 +10,23 @@
 <body>
   <div id="homepage-template">
     <h1 id="homeTitle">Welcome to My Blog!</h1>
-    <div id="posts">Latest posts
+    <div id="posts">
       {{#if blogPosts.length}}
         <h2>Latest Blog Posts</h2>
         <ul>
           {{#each blogPosts}}
             <li>
-              {{{get_emoji}}}
-              <a href="//{{project.id}}">{{project.name}}</a>
-              <p>{{this.dateCreated}}</p>
+              <p>Title: {{name}}</p>
+              <p>Content: {{content}}</p>
+              <p>Posted by {{username}} on {{dateCreated}}</p>
+              <div class="comments">
+                <h3>Comments</h3>
+                <ul>
+                  {{#each comments}}
+                    <li>{{this}}</li>
+                  {{/each}}
+                </ul>
+              </div>
             </li>
           {{/each}}
         </ul>
@@ -27,6 +35,6 @@
       {{/if}}
     </div>
   </div>
+  <script src="js/home.js"></script>
 </body>
-<script src="js/home.js"></script>
 </html>
