@@ -44,15 +44,28 @@ router.get('/signup', async (req, res, next) => {
 
 
 
+//get all blog posts
+const blogpostData = [
+    {
+      id: 1,
+      title: 'Sample Post 1',
+      content: 'Lorem ipsum dolor sit amet...',
+      dateCreated: '2023-01-01',
+      username: 'User1',
+      comments: ['Comment 1', 'Comment 2'],
+    }
+];
 
-// Define the route to serve the JSON data
-router.get('/blogpost', (req, res) => {
-    const blogDataPath = path.join(__dirname, './seeds/blogpostData.json');
-    const blogData = JSON.parse(fs.readFileSync(blogDataPath, 'utf-8'));
-    res.json(blogData);
+router.get('/', async (req, res) => {
+    try {
+      const blogpostData = await Post.findAll();
+      res.render('home', {blogpostData: blogpostData });
+    } catch (error) {
+      console.error('Error fetching blog posts:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   });
   
-
 
 
 module.exports = router;

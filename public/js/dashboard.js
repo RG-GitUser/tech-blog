@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     newPostForm.addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        const name = document.getElementById('title').value.trim();
+        const name = document.getElementById('name').value.trim();
         const content = document.getElementById('content').value.trim();
 
         try {

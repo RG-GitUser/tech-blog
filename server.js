@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const fs = require('fs');
+const { Post } = require('./models');
 
 require('dotenv').config(); // load environment variables
 
@@ -47,12 +48,20 @@ app.use(session(sess));
 app.use('./seeds/blogpostData', express.static('seeds'));
 
 
-//Route to homepage with blog post data
-app.get('/', (req, res) => {
-  res.render('home', { blogPosts: blogpostData });
+// handler for rendering homepage 
+app.get('/', async (req, res) => {
+  try {
+    // Use the Post model to fetch all blog posts from the database
+     const blogpostData = await Post.findAll();
+
+    // Render the 'home' template and pass the fetched blogPosts to it
+    res.render('home', { blogpostData });
+  } catch (error) {
+    // Handle any errors that might occur during the database query or rendering
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
-
-
 
 // API route
 app.use(require('./controllers'));
