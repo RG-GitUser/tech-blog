@@ -1,53 +1,24 @@
 const { Post } = require('../../models');
-const router = require('express').Router()
+const router = require('express').Router();
 const authenticate = require('../../utils/auth');
 
+// Create new post - save record to db
+router.post('/api/post', authenticate, async (req, res) => {
+    try {
+        const { title, content } = req.body;
+        const author_id = req.session.user_id; // Assuming you have user authentication
 
-// create new post - save record to db
-router.post('/dashboard', authenticate, async (req, res) => {
-  try {
-    const postData = await Post.create(req.body);
+        const postData = await Post.create({
+            title,
+            content,
+            user_id: author_id,
+        });
 
-    req.session.save(() => {
-      req.session.user_id = postData.id;
-      req.session.logged_in = true;
-
-      res.status(200).json(postData);
-    });
-  } catch (err) {
-    // Check if it's a Sequelize validation error
-    if (err.name === 'SequelizeValidationError') {
-      res.status(400).json({ message: 'Validation error', errors: err.errors });
-    } else {
-      res.status(500).json(err);
+        res.status(201).json(postData);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-  }
 });
 
-
-  //deleting post 
-  router.delete('/:id', authenticate, async (req, res) => {
-    try {
-      const postData = await Post.destroy({
-        where: {
-          id: req.params.id,
-          user_id: req.session.user_id,
-        },
-      });
-      if (!postData) {
-        res.status(404).json({ message: 'No posts found with this id!' });
-        return;    //if successful, display message. 
-      }
-  
-      res.status(200).json(postData);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-  
-
 module.exports = router;
-
-
-  
-  

@@ -1,31 +1,30 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Assuming you have a form with the id 'newPostForm'
     const newPostForm = document.getElementById('newPostForm');
-  
-    newPostForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
-  
-      //assigning value to variables 
-      const title = document.getElementById('title').value;
-      const content = document.getElementById('content').value;
-      const username = document.getElementById('username').value;
-  
-      try {
-        const response = await fetch('/api/post/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ title, content, username }),
-        });
-  
-        if (response.ok) {
-        
-          window.location.href = '/'; 
-        } else {
-          console.error('Failed to create post');
+
+    newPostForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const title = document.getElementById('title').value.trim();
+        const content = document.getElementById('content').value.trim();
+
+        try {
+            const response = await fetch('/api/post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title, content }),
+            });
+
+            if (response.ok) {
+                // Redirect to the updated dashboard after creating the post
+                window.location.href = '/dashboard';
+            } else {
+                console.error('Failed to create post');
+            }
+        } catch (error) {
+            console.error('Error:', error);
         }
-      } catch (error) {
-        console.error('Error:', error);
-      }
     });
 });

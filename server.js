@@ -5,8 +5,6 @@ const bcrypt = require('bcrypt');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const fs = require('fs');
-const { Post } = require('../../models');
-const authenticate = require('../../utils/auth');
 
 require('dotenv').config(); // load environment variables
 
@@ -80,44 +78,6 @@ app.post('/api/user', (req, res) => {
     return res.status(400).json({ error: 'User with this email already exists.' });
   }
 });
-
-
-// create post server side handler 
-router.post('/api/post', authenticate, async (req, res) => {
-  try {
-    const { title, content, username } = req.body;
-
-    //log the data
-    console.log('Received data:', { title, content, username });
-
-    // Create a new post
-    const newPost = await Post.create({
-      title,
-      content,
-      username,
-    });
-
-    blogpostData.push({
-      id: newPost.id,
-      title: newPost.title,
-      content: newPost.content,
-      dateCreated: newPost.date_created,  
-      username: newPost.username,
-      comments: [],  // Initialize with an empty array
-    });
-
-    // Redirect to the homepage or send a success response
-    res.redirect('/');
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
-
-
-
-
-
 
 
 
