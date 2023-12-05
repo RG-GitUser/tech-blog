@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     newPostForm.addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        const title = document.getElementById('title').value.trim();
+        const name = document.getElementById('title').value.trim();
         const content = document.getElementById('content').value.trim();
 
         try {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ title, content }),
+                body: JSON.stringify({ name, content }),
             });
 
             if (response.ok) {
