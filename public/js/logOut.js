@@ -1,10 +1,11 @@
 
-// Assume you have a function to check if the user is logged in
-function isUserLoggedIn() {
-    // Implement your logic to check if the user is logged in
-    // For example, check if there's a user session or token
-    // Return true if logged in, false otherwise
-    return localStorage.getItem('token') !== null;
+function logoutUser() {
+    // Implement your logout logic here
+    // For example, clear the user session or token
+    localStorage.removeItem('token'); // Assuming you're using localStorage for the token
+  
+    // Redirect to the login page
+    window.location.href = '/login'; // Replace '/login' with the actual path to your login page
   }
   
   document.addEventListener('DOMContentLoaded', function () {
@@ -23,15 +24,8 @@ function isUserLoggedIn() {
   
       // Add a click event listener to the new logout button
       logoutBtn.addEventListener('click', function () {
-        // Implement your logout logic here
-        // For example, clear the user session or token
-        localStorage.removeItem('token');
-           // After logging out, you may want to redirect to the login page
-      // or perform any other necessary actions
-
-  
-        // For the sake of this example, we'll reload the page
-        location.reload();
+        // Call the logoutUser function when the logout button is clicked
+        logoutUser();
       });
     }
   });
