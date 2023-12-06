@@ -18,13 +18,10 @@ router.get('/', async (req, res) => {
     });
 
     // Serialize data so the template can read it
-    const Post = postData.map((post) => Postget({ plain: true }));
+    const posts = postData.map((post) => post.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('home', {
-      Post,
-      logged_in: req.session.logged_in,
-    });
+    res.render('home', { posts, logged_in: req.session.logged_in });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -33,7 +30,7 @@ router.get('/', async (req, res) => {
 // Route for rendering handlebars view (dashboard)
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    res.render('dashboard', { pageTitle: 'Dashboard' });
+    res.render('dashboard', { pageTitle: 'Dashboard', logged_in: true });
   } catch (error) {
     console.error(error);
     next(error);
@@ -42,7 +39,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 // Route for rendering log in page
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
+  // If the user is already logged in, redirect to the dashboard
   if (req.session.logged_in) {
     res.redirect('/dashboard');
     return;
@@ -73,31 +70,9 @@ router.get('/post/:id', async (req, res) => {
       ],
     });
 
-    const Post = postData.get({ plain: true });
+    const post = postData.get({ plain: true });
 
-    res.render('post', {
-      ...Post,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// Route for rendering dashboard
-router.get('/dashboard', withAuth, async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Post }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('dashboard', {
-      ...user,
-      logged_in: true,
-    });
+    res.render('post', { ...post, logged_in: req.session.logged_in });
   } catch (err) {
     res.status(500).json(err);
   }
