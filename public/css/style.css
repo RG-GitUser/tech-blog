@@ -61,6 +61,10 @@ nav a {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 
+  #dashboard-h1 {
+    text-align: center;
+  }
+
   /*style for post container*/
   #posts {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -116,14 +120,33 @@ nav a {
     color: #333;
     list-style-type: none;
     margin-bottom: 20px;
+    border-radius: 10px; 
   }
+  
   
   #login-form a {
     color: black;
     text-decoration: none;
   }
   
+#login-title {
+  text-align: center;
+  font-family: font-family: Verdana, Geneva, Tahoma, sans-serif; 
+}
 
+
+#login-content {
+  width: 1000px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  color: #333;
+  list-style-type: none;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px; 
+}
 
   input {
     width: 90%; 
@@ -190,15 +213,17 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   max-height: 80vh; 
   overflow-y: auto; 
   margin-bottom: 200px;
+  border-radius: 10px; 
 
 }
 
 #no-account {
   flex: 1;
-  max-height: 80vh; 
+  height: 30px; 
   overflow-y: auto; 
-  margin-bottom: 200px;
+  margin-bottom: 30px;
   text-align: center;
+ 
 
 }
 
@@ -240,6 +265,7 @@ footer {
   list-style-type: none;
   margin-top: 30px;
   margin-bottom: 30px;
+  border-radius: 10px; 
 }
 
 #newPostBtn {
