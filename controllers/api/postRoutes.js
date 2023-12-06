@@ -5,20 +5,46 @@ const authenticate = require('../../utils/auth');
 // Create new post - save record to db
 router.post('/', authenticate, async (req, res) => {
   try {
-      const { name, content } = req.body;
-      const author_id = req.session.user_id; // Assuming you have user authentication
+    const { name, content } = req.body;
+    const author_id = req.session.user_id; // Assuming you have user authentication
 
-      const blogpostData = await Post.create({
-          name,
-          content,
-          user_id: author_id,
-      });
+    const blogpostData = await Post.create({
+      name,
+      content,
+      user_id: author_id,
+    });
 
-      // Redirect to the homepage after successfully creating a post
-      res.redirect('/');
+    // Redirect to the homepage after successfully creating a post
+    res.redirect('/');
   } catch (err) {
-      console.error(err);
+    console.error(err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Retrieve blog post data as JSON
+router.get('/api/posts', async (req, res) => {
+    try {
+      const postData = await Post.findAll();
+      res.json(postData);
+    } catch (error) {
+      console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+  
+
+// Define the GET route for /api/postRoutes
+router.get('/api/postRoutes', async (req, res) => {
+  try {
+    // Retrieve blog post data from the database
+    const blogpostData = await Post.findAll();
+
+    // Send the blog post data as a JSON response
+    res.json(blogpostData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
