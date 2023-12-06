@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to fetch and render blog posts
   function fetchBlogPosts() {
-    fetch('./seeds')
+    fetch('seeds')
       .then(response => {
         if (!response.ok) {
           throw new Error(`Network response was not ok - Status: ${response.status}`);
