@@ -24,26 +24,11 @@ router.post('/', authenticate, async (req, res) => {
 
 // Retrieve blog post data as JSON
 router.get('/api/posts', async (req, res) => {
-    try {
-      const postData = await Post.findAll();
-      res.json(postData);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
-    }
-  });
-  
-
-// Define the GET route for /api/postRoutes
-router.get('/api/postRoutes', async (req, res) => {
   try {
-    // Retrieve blog post data from the database
-    const blogpostData = await Post.findAll();
-
-    // Send the blog post data as a JSON response
-    res.json(blogpostData);
-  } catch (err) {
-    console.error(err);
+    const postData = await Post.findAll();
+    res.json(postData);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });

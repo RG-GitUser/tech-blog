@@ -7,7 +7,10 @@
     "test": "",
     "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "start": "node C:\\Users\\rgaff\\OneDrive\\Documents\\Assignments\\tech-blog\\server.js",
-    "watch": "nodemon server.js"
+    "watch": "nodemon server.js",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "node seed.js",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
