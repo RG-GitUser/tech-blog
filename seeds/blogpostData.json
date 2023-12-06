@@ -6,13 +6,5 @@
       "dateCreated": "2023-01-01",
       "username": "User1",
       "comments": ["Comment 1", "Comment 2"]
-    },
-    {
-      "id": 2,
-      "name": "Blog Post 2",
-      "content": "Content for Blog Post 2",
-      "dateCreated": "2023-01-02",
-      "username": "User2",
-      "comments": ["Comment 3", "Comment 4"]
     }
 ]
