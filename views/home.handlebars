@@ -9,16 +9,16 @@
 </head>
 <body>
   <div id="homepage-template">
-    <h1 id="homeTitle">Welcome to My Blog!</h1>
+    <h1 id="homeTitle"></h1>
     <div id="posts">
       {{#if blogPosts.length}}
         <h2>Latest Blog Posts</h2>
         <ul>
           {{#each blogPosts}}
             <li>
-              <p>Title: {{name}}</p>
+              <p>Title: {{title}}</p>
               <p>Content: {{content}}</p>
-              <p>Posted by {{username}} on {{dateCreated}}</p>
+              <p>Posted by {{author}} on {{date}}</p>
               <div class="comments">
                 <h3>Comments</h3>
                 <ul>

@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session(sess));
 
 // serve static files from the 'seeds' directory
-app.use('./seeds/blogpostData', express.static('seeds'));
+app.use('/seeds/blogpostData', express.static('seeds'));
 
 
 // handler for rendering homepage 
@@ -89,20 +89,8 @@ app.post('/api/user', (req, res) => {
 });
 
 
-
-
 //post server side handler
-app.get('/api/post', (req, res) => {
-  // Fetch the posts from the database
-  Post.find({}, (err, posts) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Failed to fetch posts' });
-    } else {
-      res.json(posts);
-    }
-  });
-});
+
 
 // global error handler middleware
 app.use((err, req, res, next) => {

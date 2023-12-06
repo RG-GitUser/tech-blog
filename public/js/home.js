@@ -11,36 +11,36 @@ document.addEventListener("DOMContentLoaded", function () {
     var blogPostsWithComments = processBlogPostsWithComments(posts);
 
     // Render homepage template with the latest blog posts and comments
-    var latestBlogPosts = getLatestBlogPosts(blogPostsWithComments, 3); 
+    var latestBlogPosts = getLatestBlogPosts(blogPostsWithComments, 3);
+
     var homepageHtml = homepageTemplate({ blogPosts: latestBlogPosts });
     document.getElementById(POSTS_CONTAINER_ID).innerHTML = homepageHtml;
   }
 
   fetchBlogPosts();
 
-// Function to fetch and render blog posts
-function fetchBlogPosts() {
-  fetch('/api/post')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Network response was not ok - Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      renderBlogPosts(data);
-    })
-    .catch(error => {
-      console.error('Error fetching blog data:', error);
-    });
-}
+  // Function to fetch and render blog posts
+  function fetchBlogPosts() {
+    fetch('/api/post')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok - Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        renderBlogPosts(data);
+      })
+      .catch(error => {
+        console.error('Error fetching blog data:', error);
+      });
+  }
+
   // Event listener for a new blog post creation
   document.addEventListener('newPostCreated', function () {
     // Fetch and render the updated list of blog posts after a new post is created
     fetchBlogPosts();
   });
-
-
 
   // Function to process blog post data and include comments
   function processBlogPostsWithComments(allBlogPosts) {
