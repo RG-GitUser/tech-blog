@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to fetch and render blog posts
 function fetchBlogPosts() {
-  fetch('/api/posts')
+  fetch('/api/post')
     .then(response => {
       if (!response.ok) {
         throw new Error(`Network response was not ok - Status: ${response.status}`);
@@ -40,7 +40,7 @@ function fetchBlogPosts() {
     fetchBlogPosts();
   });
 
-  
+
 
   // Function to process blog post data and include comments
   function processBlogPostsWithComments(allBlogPosts) {

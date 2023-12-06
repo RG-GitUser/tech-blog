@@ -23,7 +23,7 @@ router.post('/', authenticate, async (req, res) => {
 });
 
 // Retrieve blog post data as JSON
-router.get('/api/posts', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll();
     res.json(postData);
