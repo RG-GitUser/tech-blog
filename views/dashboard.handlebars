@@ -28,6 +28,13 @@
     <button id='newPostBtn' type="submit">Create Post</button>
   </form>
 </div>
+
+<div id="dashboardBlogPostsContainer">
+  {{#each blogPosts}}
+    {{> blogpost}}
+  {{/each}}
+</div>
+
     <script src="js/dashboard.js"></script>
 </body>
 </html>

@@ -52,16 +52,15 @@ router.post('/', async (req, res) => {
   });
 
   
-  //checking for users login status/destroy session if logged in 
-  router.post('/logout', (req, res) => {
-    if (req.session.logged_in) {
-      req.session.destroy(() => {
-        res.status(204).end();
-      });
-    } else {
-      res.status(404).end();
-    }
-  });
+// logout 
+app.post('/logout', (req, res) => {
+  // Clear the user-related session data
+  req.session.isAuthenticated = false;
+
+  // Render the logout template
+  res.render('logout', { isAuthenticated: req.session.isAuthenticated });
+});
+
 
 
 

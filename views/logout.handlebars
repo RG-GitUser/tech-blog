@@ -1,0 +1,14 @@
+<html>
+<body>
+  <h1>Logout</h1>
+  
+  {{#if isAuthenticated}}
+    <p id="redirectMessage">You have been successfully logged out. Redirecting to <a href="/">Home</a> in 3 seconds...</p>
+  {{else}}
+    <p>You are not currently logged in. <a href="/">Home</a></p>
+  {{/if}}
+
+  <!-- Include the logOut.js file -->
+  <script src="/js/logOut.js"></script>
+</body>
+</html>

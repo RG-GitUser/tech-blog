@@ -6,6 +6,8 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const fs = require('fs');
 const { Post } = require('./models');
+const bodyParser = require('body-parser');
+
 
 require('dotenv').config(); // load environment variables
 
@@ -44,23 +46,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session(sess));
 
+
+// Middleware to parse JSON request bodies
+app.use(bodyParser.json());
+
 // serve static files from the 'seeds' directory
 app.use('/seeds/blogpostData', express.static('seeds'));
 
 
 // handler for rendering homepage 
-app.get('/', async (req, res) => {
-  try {
-    // Use the Post model to fetch all blog posts from the database
-     const blogpostData = await Post.findAll();
-
-    // Render the 'home' template and pass the fetched blogPosts to it
-    res.render('home', { blogpostData });
-  } catch (error) {
-    // Handle any errors that might occur during the database query or rendering
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
+app.get('/', (req, res) => {
+  const blogPosts = blogPosts(); 
+  res.render('home', { blogPosts });
 });
 
 // API route
@@ -88,9 +85,52 @@ app.post('/api/user', (req, res) => {
   }
 });
 
+//login reflection 
+const sampleUser = {
+  username: 'JohnDoe',
+  isLoggedIn: false,
+};
+
+// logout handler 
+app.post('/logout', (req, res) => {
+  // Clear the user-related session data
+  req.session.isAuthenticated = false;
+
+  // Render the logout template
+  res.render('logout', { isAuthenticated: req.session.isAuthenticated });
+});
+
+
+
+// Routes
+app.get('/', (req, res) => {
+  // Pass user data to the Handlebars template
+  res.render('home', { user: sampleUser });
+});
+
+
 
 //post server side handler
+let blogPosts = [];
 
+// Route to create a new blog post
+app.post('/api/post', (req, res) => {
+  const { name, description } = req.body;
+  const newPost = {
+    id: blogPosts.length + 1,
+    name,
+    description,
+    dateCreated: new Date().toISOString(),
+    comments: []
+  };
+  blogPosts.push(newPost);
+  res.status(201).json(newPost);
+});
+
+// Route to get all blog posts
+app.get('/api/post', (req, res) => {
+  res.json(blogPosts);
+});
 
 // global error handler middleware
 app.use((err, req, res, next) => {
