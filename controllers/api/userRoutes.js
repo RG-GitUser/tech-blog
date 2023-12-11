@@ -1,6 +1,16 @@
 const { User } = require('../../models');
 const router = require('express').Router()
 
+  
+// // logout 
+// app.post('/logout', (req, res) => {
+//   // Clear the user-related session data
+//   req.session.isAuthenticated = false;
+// 
+//   // Render the logout template
+//   res.render('logout', { isAuthenticated: req.session.isAuthenticated });
+// });
+// 
 
 // create new user record in db
 router.post('/', async (req, res) => {
@@ -50,16 +60,6 @@ router.post('/', async (req, res) => {
       res.status(400).json(err);
     }
   });
-
-  
-// logout 
-app.post('/logout', (req, res) => {
-  // Clear the user-related session data
-  req.session.isAuthenticated = false;
-
-  // Render the logout template
-  res.render('logout', { isAuthenticated: req.session.isAuthenticated });
-});
 
 
 

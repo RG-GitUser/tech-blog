@@ -1,28 +1,38 @@
-document.addEventListener('DOMContentLoaded', function() {
-  // Check if the 'auth' object is defined
-  if (typeof auth !== 'undefined') {
-    updateUI(auth.isAuthenticated);
-  }
-});
+// authMiddleware.js
 
-function updateUI(isAuthenticated) {
-  // Find the login/logout button element by ID or class
-  const loginButton = document.getElementById('loginButton');
-  
-  // Update the button text based on the authentication status
-  if (isAuthenticated) {
-    loginButton.innerText = 'Log Out';
-    // Assuming you have a logout link with id="logoutLink"
-    const logoutLink = document.getElementById('logoutLink');
-    if (logoutLink) {
-      logoutLink.style.display = 'block'; // Show the logout link
-    }
-  } else {
-    loginButton.innerText = 'Log In';
-    // Assuming you have a logout link with id="logoutLink"
-    const logoutLink = document.getElementById('logoutLink');
-    if (logoutLink) {
-      logoutLink.style.display = 'none'; // Hide the logout link
-    }
+const authenticate = (req, res, next) => {
+  // Implement your authentication logic here.
+  // For example, you can validate a token.
+
+  const authToken = req.headers.authorization;
+
+  if (!authToken) {
+    // If no token is provided, user is not authenticated
+    req.auth = { isAuthenticated: false };
+    return next();
   }
-}
+
+  // Perform your token validation logic here
+  // Replace this with your actual token validation mechanism
+  if (validateToken(authToken)) {
+    // If token is valid, set isAuthenticated to true
+    req.auth = { isAuthenticated: true };
+  } else {
+    // If token is invalid, set isAuthenticated to false
+    req.auth = { isAuthenticated: false };
+  }
+
+  next();
+};
+
+// Replace this function with your actual token validation logic
+const validateToken = (token) => {
+  // Implement your token validation logic here
+  // For example, you can use a library like jsonwebtoken
+  // or validate the token against your authentication server
+
+  // Replace this with your actual token validation logic
+  return true;
+};
+
+module.exports = authenticate;

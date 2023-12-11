@@ -2,6 +2,8 @@ const { Post } = require('../../models');
 const router = require('express').Router();
 const authenticate = require('../../utils/auth');
 
+router.use(authenticate);
+
 // Create new post - save record to db
 router.post('/', authenticate, async (req, res) => {
   try {
@@ -14,8 +16,8 @@ router.post('/', authenticate, async (req, res) => {
       user_id: author_id,
     });
 
-    // Redirect to the homepage after successfully creating a post
-    res.redirect('/');
+    // Send a JSON response indicating success
+    res.status(201).json(blogpostData);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal Server Error' });
