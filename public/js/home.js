@@ -1,24 +1,12 @@
-// home.js
-
-document.addEventListener('DOMContentLoaded', async function () {
-  try {
-    // Make a fetch request to get the blog posts from the server
-    const response = await fetch('/api/post'); 
-    const blogPosts = await response.json();
-
-    // Update the UI with the retrieved blog posts
-    updateUI(blogPosts);
-  } catch (error) {
-    console.error('Error fetching blog posts:', error);
-  }
-});
-
 function updateUI(blogPosts) {
-  const postsContainer = document.getElementById('posts');
-
+  if (!blogPosts) {
+    console.error('Blog posts data is undefined.');
+    return;
+  }
+  
   if (blogPosts.length > 0) {
     const postsList = document.createElement('ul');
-
+  
     blogPosts.forEach(post => {
       const postItem = document.createElement('li');
       postItem.innerHTML = `
@@ -34,12 +22,16 @@ function updateUI(blogPosts) {
           </div>
         </div>
       `;
-
+  
       postsList.appendChild(postItem);
     });
-
+  
+    // append postsList to your element in the DOM
+    const postsContainer = document.getElementById('posts');
+    postsContainer.innerHTML = ''; // Clear existing content
     postsContainer.appendChild(postsList);
   } else {
-    postsContainer.innerHTML = '<p>No blog posts yet.</p>';
+    // Handle the case where blogPosts is empty
+    console.error('Blog posts data is empty.');
   }
 }
