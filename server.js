@@ -35,6 +35,13 @@ const sess = {
   }),
 };
 
+
+// setup partials view 
+const partialsDir = exphbs.create({
+  partialPath: [path.join(__dirname, 'views', 'partials')]
+})
+
+
 // set up handlebars
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', hbs.engine);
@@ -55,10 +62,23 @@ app.use('/seeds/blogpostData', express.static('seeds'));
 
 
 // handler for rendering homepage 
-app.get('/', (req, res) => {
-  const blogPosts = blogPosts(); 
-  res.render('home', { blogPosts });
+
+// Define blogPosts as an empty array initially 
+
+
+app.get('/', async (req, res) => {
+  try {
+    // Fetch all blog posts from the database
+    const blogPosts = await Post.findAll();
+
+    // Render the 'home' view with the retrieved blog posts
+    res.render('home', { blogPosts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
+
 
 // API route
 app.use(require('./controllers'));
