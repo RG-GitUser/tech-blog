@@ -3,7 +3,6 @@ function updateUI(blogPosts) {
     console.error('Blog posts data is undefined.');
     return;
   }
-
   const latestThreePosts = blogPosts.slice(0, 3);
 
   if (latestThreePosts.length > 0) {
@@ -23,7 +22,9 @@ function updateUI(blogPosts) {
             </ul>
           </div>
         </div>
-      `;
+      `
+      console.log('testing', blogPosts)
+      ;
 
       postsList.appendChild(postItem);
     });

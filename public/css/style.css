@@ -289,13 +289,9 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
   
-#post-content, #content { 
+#post-content, #description { 
   display: flex;
   flex-direction: column; 
-}
-
-#content {
-  
 }
 
 
