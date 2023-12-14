@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         const name = document.getElementById('name').value.trim();
-        const content = document.getElementById('content').value.trim();
+        const content = document.getElementById('description').value.trim();
 
         try {
             const response = await fetch('/api/post', {
