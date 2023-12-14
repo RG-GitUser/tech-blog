@@ -1,3 +1,11 @@
+fetch('blogpostData')
+  .then(response => response.json())
+  .then(blogPosts => {
+    // Call the updateUI function with the received blogPosts data
+    updateUI(blogPosts);
+  })
+  .catch(error => console.error('Fetch error:', error));
+
 function updateUI(blogPosts) {
   if (!blogPosts) {
     console.error('Blog posts data is undefined.');

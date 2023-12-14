@@ -1,4 +1,4 @@
-const { Post } = require('../../models');
+const { Post, User } = require('../../models');
 const router = require('express').Router();
 const authenticate = require('../../utils/auth');
 
@@ -8,7 +8,7 @@ router.use(authenticate);
 router.post('/', authenticate, async (req, res) => {
   try {
     const { name, content } = req.body;
-    const author_id = req.session.user_id; // Assuming you have user authentication
+    const author_id = req.session.user_id; 
 
     const blogpostData = await Post.create({
       name,
@@ -24,11 +24,23 @@ router.post('/', authenticate, async (req, res) => {
   }
 });
 
-// Retrieve blog post data as JSON
+// Retrieve only the first three blog posts as JSON
 router.get('/', async (req, res) => {
   try {
-    const postData = await Post.findAll();
-    res.json(postData);
+    const postData = await Post.findAll({
+      limit: 3, // Limit the number of retrieved posts to 3
+      order: [['createdAt', 'DESC']],
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    res.json(posts);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
