@@ -1,21 +1,15 @@
-fetch('blogpostData')
-  .then(response => response.json())
-  .then(blogPosts => {
-    // Call the updateUI function with the received blogPosts data
-    updateUI(blogPosts);
-  })
-  .catch(error => console.error('Fetch error:', error));
-
 function updateUI(blogPosts) {
   if (!blogPosts) {
     console.error('Blog posts data is undefined.');
     return;
   }
-  
-  if (blogPosts.length > 0) {
+
+  const latestThreePosts = blogPosts.slice(0, 3);
+
+  if (latestThreePosts.length > 0) {
     const postsList = document.createElement('ul');
-  
-    blogPosts.forEach(post => {
+
+    latestThreePosts.forEach(post => {
       const postItem = document.createElement('li');
       postItem.innerHTML = `
         <div class="blogPostContainer">
@@ -30,16 +24,16 @@ function updateUI(blogPosts) {
           </div>
         </div>
       `;
-  
+
       postsList.appendChild(postItem);
     });
-  
+
     // append postsList to your element in the DOM
     const postsContainer = document.getElementById('posts');
     postsContainer.innerHTML = ''; // Clear existing content
     postsContainer.appendChild(postsList);
   } else {
-    // Handle the case where blogPosts is empty
-    console.error('Blog posts data is empty.');
+    // Handle the case where blogPosts is empty or less than 3
+    console.error('Blog posts data is empty or less than 3.');
   }
 }
