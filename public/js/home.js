@@ -14,8 +14,8 @@ function updateUI(blogPosts) {
       postItem.innerHTML = `
         <div class="blogPostContainer">
           <p>Title: ${post.name}</p>
-          <p>Content: ${post.content}</p>
-          <p>Posted by ${post.username} on ${post.dateCreated}</p>
+          <p>Content: ${post.description}</p>
+          <p>Posted by ${post.user_id} on ${post.date_created}</p>
           <div class="comments">
             <h3>Comments</h3>
             <ul>

@@ -7,12 +7,12 @@ router.use(authenticate);
 // Create new post - save record to db
 router.post('/', authenticate, async (req, res) => {
   try {
-    const { name, content } = req.body;
+    const { name, description } = req.body;
     const author_id = req.session.user_id; 
 
     const blogpostData = await Post.create({
       name,
-      content,
+      description,
       user_id: author_id,
     });
 
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
       limit: 3, // Limit the number of retrieved posts to 3
-      order: [['createdAt', 'DESC']],
+      order: [['name', 'DESC']],
       include: [
         {
           model: User,

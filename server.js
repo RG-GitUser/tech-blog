@@ -61,15 +61,14 @@ app.use(bodyParser.json());
 app.use('/seeds/blogpostData', express.static('seeds'));
 
 
-// handler for rendering homepage 
-
-// Define blogPosts as an empty array initially 
-
-
+// get blog posts from db and render on homepage 
 app.get('/', async (req, res) => {
   try {
     // Fetch all blog posts from the database
-    const blogPosts = await Post.findAll();
+    const postData = await Post.findAll();
+
+    // Convert Sequelize instances to plain JavaScript objects
+    const blogPosts = postData.map((post) => post.get({ plain: true }));
 
     // Render the 'home' view with the retrieved blog posts
     res.render('home', { blogPosts });
@@ -80,7 +79,7 @@ app.get('/', async (req, res) => {
 });
 
 
-// API route
+// API routes
 app.use(require('./controllers'));
 
 
@@ -121,15 +120,6 @@ app.post('/logout', (req, res) => {
 });
 
 
-
-// Routes
-app.get('/', (req, res) => {
-  // Pass user data to the Handlebars template
-  res.render('home', { user: sampleUser });
-});
-
-
-
 //post server side handler
 let blogPosts = [];
 
@@ -140,7 +130,7 @@ app.post('/api/post', (req, res) => {
     id: blogPosts.length + 1,
     name,
     description,
-    dateCreated: new Date().toISOString(),
+    date_created: new Date().toISOString(),
     comments: []
   };
   blogPosts.push(newPost);

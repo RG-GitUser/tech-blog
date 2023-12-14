@@ -3,7 +3,7 @@
       "id": 1,
       "name": "Blog Post 1",
       "description": "Content for Blog Post 1",
-      "dateCreated": "2023-01-01",
+      "date_created": "2023-01-01",
       "username": "User1",
       "comments": ["Comment 1", "Comment 2"]
     }
