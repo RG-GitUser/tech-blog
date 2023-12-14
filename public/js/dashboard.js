@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const name = document.getElementById('name').value.trim();
         const description = document.getElementById('description').value.trim();
+        const user_id = document.getElementById('user_id').value.trim();
 
         try {
             const response = await fetch('/api/post', {
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, description }),
+                body: JSON.stringify({ name, description, user_id }),
             });
 
             if (response.ok) {

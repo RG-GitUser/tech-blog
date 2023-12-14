@@ -31,6 +31,10 @@ Post.init(
         key: 'id',
       },
     },
+    comments: {
+      type: DataTypes.JSON, // Assuming comments are stored as JSON
+      defaultValue: [],     // Default value is an empty array
+    },
   },
   {
     sequelize,

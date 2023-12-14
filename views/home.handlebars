@@ -1,35 +1,42 @@
-<!-- Homepage Handlebars Template (views/home.handlebars) -->
+<!-- Homepage Handlebars Template  -->
 
 <body>
   <div id="homepage-template">
     <h1 id="homeTitle">Welcome to the Tech Blog!</h1>
     <div id="posts">
       {{#if blogPosts.length}}
-        <h2>Latest Blog Posts</h2>
-        <ul>
-          {{#each blogPosts}}
-            <li>
-              <div class="blogPostContainer">
-                <p>Title: {{name}}</p>
-                <p>Content: {{description}}</p>
-                <p>Date Posted: {{user_id}} on {{date_created}}</p>
-                <div class="comments">
-                  <h3>Comments</h3>
-                  <ul>
-                    {{#each comments}}
-                      <li>{{this}}</li>
-                    {{/each}}
-                  </ul>
-                </div>
-              </div>
-            </li>
-          {{/each}}
-        </ul>
+      <h2>Latest Blog Posts</h2>
+      <ul>
+        {{#each blogPosts}}
+        <li>
+          <div class="blogPostContainer">
+            <p>Title: {{name}}</p>
+            <p>Content: {{description}}</p>
+            <p>Date Posted: {{user_id}} on {{date_created}}</p>
+            <div class="comments">
+              <h3>Comments</h3>
+              <ul>
+                {{#each blogPost.comments}}
+                <li>{{this}}</li>
+                {{/each}}
+              </ul>
+            </div>
+            <form id="comment-form">
+              <label for="comment">Leave a comment:</label>
+              <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+              <button type="submit">Submit Comment</button>
+            </form>
+
+          </div>
+        </li>
+        {{/each}}
+      </ul>
       {{else}}
-        <p>No blog posts yet.</p>
+      <p>No blog posts yet.</p>
       {{/if}}
     </div>
   </div>
   <script src="js/home.js"></script>
 </body>
+
 </html>
