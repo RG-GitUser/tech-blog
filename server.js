@@ -112,11 +112,13 @@ const sampleUser = {
 
 // logout handler 
 app.post('/logout', (req, res) => {
-  // Clear the user-related session data
-  req.session.isAuthenticated = false;
-
-  // Render the logout template
-  res.render('logout', { isAuthenticated: req.session.isAuthenticated });
+  // Clear the session data
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    }
+    res.render('logout', { isAuthenticated: false });
+  });
 });
 
 

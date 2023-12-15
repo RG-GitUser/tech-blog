@@ -326,4 +326,13 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 #newPostBtn {
   margin-top: 20px;
+
+} 
+
+#comment-form {
+  background-color: #61dafb;
+  color: #1a1a1a;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
 }

@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Assuming you have a form with the id 'newPostForm'
-    const newPostForm = document.getElementById('newPostForm');
 
+    const newPostForm = document.getElementById('newPostForm');
+    
+    //create new post 
     newPostForm.addEventListener('submit', async function (event) {
         event.preventDefault();
 
