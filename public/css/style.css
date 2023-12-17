@@ -362,3 +362,17 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 #submit-btn:hover {
   background-color: #27ae60;
 }
+
+/*Delete button position and style*/ 
+
+
+#deleteBtn{
+  position: absolute;
+  top: 275px;
+  right: 375px;
+  background-color: black;
+}
+
+#deleteBtn:hover {
+ background-color: red;
+}
