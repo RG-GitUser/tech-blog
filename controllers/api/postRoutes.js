@@ -1,4 +1,4 @@
-const { Post, User, Comments } = require('../../models');
+const { Post, User } = require('../../models');
 const router = require('express').Router();
 const authenticate = require('../../utils/auth');
 
@@ -14,10 +14,9 @@ router.post('/', authenticate, async (req, res) => {
       name,
       description,
       user_id: author_id,
-      comments
     });
 
-    // Send a JSON response indicating success
+    //Success message
     res.status(201).json(blogpostData);
   } catch (err) {
     console.error(err);
@@ -34,6 +33,9 @@ router.get('/', async (req, res) => {
         {
           model: User,
           attributes: ['name'],
+        },
+        {
+          model: Comments, 
         },
       ],
     });

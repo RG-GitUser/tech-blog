@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const fs = require('fs');
-const { Post } = require('./models');
+const { Post, User } = require('./models');
 const bodyParser = require('body-parser');
 
 

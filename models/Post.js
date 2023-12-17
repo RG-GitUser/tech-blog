@@ -33,7 +33,7 @@ Post.init(
     },
     comments: {
       type: DataTypes.JSON, 
-      defaultValue: [],     // Default value is an empty array
+      defaultValue: [],     
     },
   },
   {

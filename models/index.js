@@ -1,7 +1,7 @@
 // index.js
 const User = require('./User');
 const Post = require('./Post');
-const Comment = require('./comments'); 
+const Comment = require('./Comment'); 
 
 User.hasMany(Post, {
   onDelete: 'CASCADE'
