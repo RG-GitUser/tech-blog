@@ -1,10 +1,10 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
+// comments.js
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-class customElements extends Model {}
+class Comment extends Model {}
 
-//comment model, table, object
-comments.init(
+Comment.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -12,7 +12,7 @@ comments.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        comment: {
+        comments: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -37,8 +37,8 @@ comments.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: "comment",
+        modelName: "comments",
     }
 );
 
-module.exports = customElements;
+module.exports = Comment;

@@ -1,4 +1,4 @@
-const { Post, User } = require('../../models');
+const { Post, User, Comments } = require('../../models');
 const router = require('express').Router();
 const authenticate = require('../../utils/auth');
 
@@ -14,6 +14,7 @@ router.post('/', authenticate, async (req, res) => {
       name,
       description,
       user_id: author_id,
+      comments
     });
 
     // Send a JSON response indicating success
@@ -24,12 +25,11 @@ router.post('/', authenticate, async (req, res) => {
   }
 });
 
-// Retrieve only the first three blog posts as JSON
+// Retrieve blog posts as JSON
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
-      limit: 3, // Limit the number of retrieved posts to 3
-      order: [['name', 'DESC']],
+      order: [['name', 'ASC']],
       include: [
         {
           model: User,
@@ -46,5 +46,39 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+
+router.post('/:id/comment', async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const { comment } = req.body;
+    const userId = req.session.user_id;
+
+    // Find the post
+    const post = await Post.findByPk(postId);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    // Append the new comment
+    const newComment = {
+      text: comment,
+      user_id: userId,
+      date_created: new Date(),
+    };
+
+    post.comments.push(newComment);
+
+    // Save the updated post
+    await post.save();
+
+    res.status(201).json(newComment);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 
 module.exports = router;

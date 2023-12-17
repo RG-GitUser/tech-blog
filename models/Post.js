@@ -32,7 +32,7 @@ Post.init(
       },
     },
     comments: {
-      type: DataTypes.JSON, // Assuming comments are stored as JSON
+      type: DataTypes.JSON, 
       defaultValue: [],     // Default value is an empty array
     },
   },

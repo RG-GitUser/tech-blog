@@ -177,14 +177,9 @@ nav a {
     color: #fff;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease; /* Add color transition */
   }
 
-  li:hover {
-    background-color: grey;
-    color: #e6e6e6; 
-  }
 
 label {
 font-size: 20px;
@@ -330,9 +325,40 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 } 
 
 #comment-form {
-  background-color: #61dafb;
-  color: #1a1a1a;
+  max-width: 600px;
+  margin: auto;
+  background-color: #444;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#comment-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+#comment {
+  width: 96.5%;
   padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #888;
+  border-radius: 4px;
+  background-color: #555;
+  color: #fff;
+}
+
+#submit-btn {
+  background-color: #2ecc71;
+  color: #fff;
+  padding: 10px 20px;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
+}
+
+#submit-btn:hover {
+  background-color: #27ae60;
 }
