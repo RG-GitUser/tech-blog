@@ -289,19 +289,18 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   flex-direction: column; 
 }
 
-
 #new-post {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
+  flex-direction: column;
+  align-items: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 
 #newPostForm {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 20px; /* Add margin at the bottom of the form */
 }
 
 #newPostForm label {
@@ -321,12 +320,12 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 #newPostBtn {
   margin-top: 20px;
-
-} 
+}
 
 #comment-form {
   max-width: 600px;
   margin: auto;
+  margin-top: 20px; /* Add margin at the top of the comment form */
   background-color: #444;
   padding: 20px;
   border-radius: 8px;
@@ -335,18 +334,23 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 #comment-form label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 500px; 
   color: #fff;
 }
 
 #comment {
   width: 96.5%;
+  height: 30px;
   padding: 10px;
   margin-bottom: 16px;
   border: 1px solid #888;
   border-radius: 4px;
   background-color: #555;
   color: #fff;
+}
+
+#leaveComment{
+  margin-bottom:
 }
 
 #submit-btn {
@@ -363,16 +367,19 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: #27ae60;
 }
 
-/*Delete button position and style*/ 
+/* Delete button position and style */
+#deleteBtnContainer {
+  position: relative; 
+}
 
-
-#deleteBtn{
-  position: absolute;
-  top: 275px;
-  right: 375px;
+#deleteBtn {
+  position: sticky;
+  top: 275px; 
+  right: 375px; 
   background-color: black;
+  z-index: 1; 
 }
 
 #deleteBtn:hover {
- background-color: red;
+  background-color: red;
 }

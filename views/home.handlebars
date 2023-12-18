@@ -9,11 +9,13 @@
       <ul>
         {{#each blogPosts}}
         <li>
+          <div class="deleteBtnContainer">
           <div class="blogPostContainer">
             <p>Title: {{name}}</p>
-            <button id="deleteBtn">DELETE</button>
             <p>Content: {{description}}</p>
             <p>Date Posted: {{user_id}} on {{date_created}}</p>
+            <button id="deleteBtn">DELETE</button>
+            </div>
             <div class="comments">
               <h3>Comments</h3>
               <ul>
@@ -32,7 +34,7 @@
             </div>
 
             <form id="comment-form">
-              <label for="comment">Leave a comment:</label>
+              <label id="leaveComment">Leave a comment:</label>
               <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
               <button type="submit">Submit Comment</button>
             </form>
