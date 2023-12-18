@@ -38,3 +38,37 @@ function updateUI(blogPosts) {
     console.error('Blog posts data is empty or less than 3.');
   }
 }
+
+//Modal functionality 
+
+document.body.addEventListener('click', async function (event) {
+  if (event.target.matches('.btn-danger')) {
+    const postId = event.currentTarget.dataset.postId;
+
+    // Make an AJAX request to delete the post
+    $.ajax({
+      url: `/api/posts/${postId}`,
+      type: 'DELETE',
+      success: function (data) {
+        // Handle success, update UI, remove the blog post container, etc.
+        console.log('Blog post deleted:', data.message);
+        // Remove the blog post container
+        $('.blogPostContainer').remove();
+        // Close the modal
+        $('#deleteModal').modal('hide');
+      },
+      error: function (error) {
+        // Handle error and show an error message
+        console.error('Error deleting blog post:', error.responseJSON.message);
+        // Close the modal even in case of an error
+        $('#deleteModal').modal('hide');
+      }
+    });
+  }
+});
+
+  console.log('Blog post deleted!');
+  
+  // Close the modal
+  $('#deleteModal').modal('hide');
+
