@@ -16,7 +16,7 @@
               <p>Date Posted: {{user_id}} on {{date_created}}</p>
               <button class="btn btn-danger" id="deleteBtn" onclick="openModal('{{id}}')">DELETE</button>
               <div class="comments">
-                <h3>Comments</h3>
+                <div id="commentHead">Comments</div>
                 <ul>
                   {{#each blogPost.comments}}
                   <li>{{this}}</li>
