@@ -83,26 +83,28 @@ router.post('/:id/comment', async (req, res) => {
 });
 
 
-// Delete a post 
-
-router.delete('/:id', (req, res) => {
+// Delete a post
+router.delete('/:id', async (req, res) => {
   const postId = parseInt(req.params.id);
 
-  // Find the post in the array (replace with database query in a real application)
-  const postIndex = blogPosts.findIndex(post => post.id === postId);
+  try {
+    // Find the post in the database
+    const post = await Post.findByPk(postId);
 
-  if (postIndex !== -1) {
-    // Remove the post from the array
-    blogPosts.splice(postIndex, 1);
+    if (!post) {
+      // Post not found, respond with an error message
+      return res.status(404).json({ success: false, message: 'Blog post not found.' });
+    }
 
-    // Respond with a success message (or additional data if needed)
+    // Delete the post from the database
+    await post.destroy();
+
+    // Respond with a success message
     res.json({ success: true, message: 'Blog post deleted successfully.' });
-  } else {
-    // Post not found, respond with an error message
-    res.status(404).json({ success: false, message: 'Blog post not found.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
-
 
 module.exports = router;

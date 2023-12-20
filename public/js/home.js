@@ -76,6 +76,8 @@ function deletePost(postId) {
     type: 'DELETE',
     success: function (data) {
       console.log('Post deleted:', data);
+      // Assuming blogPosts is updated somewhere in your code
+      updateUI(blogPosts); // Call updateUI after deleting a post
       $('#deleteModal').modal('hide');
     },
     error: function (error) {
@@ -84,3 +86,4 @@ function deletePost(postId) {
     }
   });
 }
+

@@ -35,6 +35,8 @@ const sess = {
   }),
 };
 
+app.use(session(sess));
+
 
 // setup partials view 
 const partialsDir = exphbs.create({
@@ -147,11 +149,29 @@ app.get('/api/post', (req, res) => {
 
 //delete a post 
 
-app.delete('/api/post/:id', (req, res) => {
+app.delete('/api/post/:id', async (req, res) => {
   const postId = req.params.id;
 
-  res.json({ success: true, message: 'Blog post deleted successfully.' });
+  try {
+    // Find the post in the database
+    const post = await Post.findByPk(postId);
+
+    if (!post) {
+      // Post not found, respond with an error message
+      return res.status(404).json({ success: false, message: 'Blog post not found.' });
+    }
+
+    // Delete the post from the database
+    await post.destroy();
+
+    // Respond with a success message
+    res.json({ success: true, message: 'Blog post deleted successfully.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Error deleting blog post.' });
+  }
 });
+
 
 
 // global error handler middleware
