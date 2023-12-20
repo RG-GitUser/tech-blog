@@ -380,13 +380,10 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 /* Delete button position and style */
 #deleteBtnContainer {
-  position: relative;
+  position: sticky;
 }
 
 #deleteBtn {
-  position: sticky;
-  top: 275px;
-  right: 375px;
   background-color: black;
   color: #fff;
   padding: 10px 20px;
@@ -394,9 +391,9 @@ font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease-in-out; 
+  transition: background-color 0.3s ease-in-out;
+  z-index: 1; /* Ensure the delete button appears above other elements */
 }
-
 #deleteBtn:hover {
   background-color: red;
 }
