@@ -43,3 +43,50 @@ function updateUI(blogPosts) {
 
 
 
+ //Delete post functionality 
+
+ $(document).ready(function () {
+  // Add an event listener for the delete button click
+  $('.btn-danger').on('click', function () {
+    const postId = $(this).data('post-id');
+
+    // Store the post ID in a data attribute of the delete button
+    $('#confirmDelete').data('post-id', postId);
+
+    // Show the modal
+    $('#deleteModal').modal('show');
+  });
+
+  // Add an event listener for the confirm delete button click
+  $('#confirmDelete').on('click', function () {
+    const postId = $(this).data('post-id');
+    
+    // Call a function to handle the delete (AJAX or form submission)
+    deletePost(postId);
+  });
+
+  function deletePost(postId) {
+    // AJAX request to delete a post
+    $.ajax({
+      url: `/api/posts/${postId}`,
+      type: 'DELETE',
+      success: function (data) {
+        // Handle success 
+        console.log('Post deleted:', data);
+
+        // Close the modal after deletion
+        $('#deleteModal').modal('hide');
+
+        // Remove the blog post container
+        $(`.blogPostContainer[data-post-id="${postId}"]`).remove();
+      },
+      error: function (error) {
+        // Handle error 
+        console.error('Error deleting post:', error);
+
+        // Close the modal even in case of an error
+        $('#deleteModal').modal('hide');
+      }
+    });
+  }
+});
