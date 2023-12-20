@@ -144,6 +144,16 @@ app.get('/api/post', (req, res) => {
   res.json(blogPosts);
 });
 
+
+//delete a post 
+
+app.delete('/api/post/:id', (req, res) => {
+  const postId = req.params.id;
+
+  res.json({ success: true, message: 'Blog post deleted successfully.' });
+});
+
+
 // global error handler middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
