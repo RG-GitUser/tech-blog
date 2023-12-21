@@ -76,9 +76,8 @@ function deletePost(postId) {
     type: 'DELETE',
     success: function (data) {
       console.log('Post deleted:', data);
-      // Assuming blogPosts is updated somewhere in your code
-      updateUI(blogPosts); // Call updateUI after deleting a post
       $('#deleteModal').modal('hide');
+      location.reload(); // Reload the page after successful deletion
     },
     error: function (error) {
       console.error('Error deleting post:', error);
