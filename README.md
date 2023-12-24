@@ -2,7 +2,7 @@
 
 
 ## Description
-In this project, I have created an MVC style blog with handlebars, SQL and javascript. You're able to create an account, login, create a new post and delete the post. The user also has the ablility to leave a comment.
+In this project, I have created an MVC style blog with handlebars, SQL and JavaScript. You're able to create an account, login, create a new post and delete the post. The user also has the ablility to leave a comment.
 
 ### Installation
 From the "Tech-Blog" repository (https://github.com/RG-GitUser/tech-blog) select the "Code" dropdown.
