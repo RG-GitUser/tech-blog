@@ -42,7 +42,7 @@
     "sequelize": "^6.35.1"
   },
   "engines": {
-    "node": "16.x"
+    "node": "16.20.2"
   },
   "type": "commonjs"
 }
