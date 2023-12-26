@@ -6,7 +6,7 @@
   "scripts": {
     "test": "",
     "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "start": "node C:\\Users\\rgaff\\OneDrive\\Documents\\Assignments\\tech-blog\\server.js",
+    "start": "node ./server.js",
     "watch": "nodemon server.js",
     "install": "cd server && npm install && cd ../client && npm install",
     "seed": "node seed.js",
@@ -44,5 +44,6 @@
   "engines": {
     "node": "16.20.2"
   },
-  "type": "commonjs"
+  "type": "commonjs",
+  "keywords": []
 }
